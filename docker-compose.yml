@@ -1,0 +1,30 @@
+# Definição dos serviços que compõem a aplicação.
+services:
+  # Serviço principal da API, baseado em FastAPI.
+  app:
+    # Constrói a imagem Docker a partir do Dockerfile localizado no diretório atual.
+    build: .
+    # Define um nome amigável para o contêiner, facilitando comandos e identificação.
+    container_name: api
+    # Mapeia a porta 8000 do host para a porta 8000 do contêiner.
+    # Assim, você acessa a API em http://localhost:8000 no seu navegador.
+    ports:
+      - "8000:8000"
+    # Monta o diretório atual do host no diretório /app do contêiner.
+    # Isso permite:
+    #   1. Live reload: alterações no código são refletidas imediatamente no contêiner.
+    #   2. Persistência do banco SQLite: o arquivo escola.db permanece no host.
+    volumes:
+      - .:/app
+    # (Opcional) Define variáveis de ambiente, se necessário.
+    # environment:
+    #   - VARIAVEL=valor
+    # (Opcional) Define o diretório de trabalho padrão do contêiner.
+    # working_dir: /app
+    # (Opcional) Reinicia o contêiner automaticamente em caso de falha.
+    # restart: unless-stopped
+
+# (Opcional) Defina volumes nomeados ou redes personalizadas aqui, se necessário.
+# volumes:
+#   dados_db:
+#     driver: local
